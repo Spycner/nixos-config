@@ -16,7 +16,7 @@
 
 	{
 	  home-manager = {
-            user.pkraus.imports = homeImports."pkraus@persephone";
+	    user.pkraus.imports = homeImports."pkraus@persephone";
 	    extraSpecialArgs = specialArgs;
 	    backupFileExtension = "bak";
 	  };

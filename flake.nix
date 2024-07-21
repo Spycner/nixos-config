@@ -39,12 +39,12 @@
     };
   };
 
-  outputs = { self, nixpkgs, flake-parts, ... } @ inputs:
+  outputs = { self, nixpkgs, home-manager, flake-parts, ... } @ inputs:
     flake-parts.lib.mkFlake { inherit inputs; } {
       systems = [ "x86_64-linux" ];
 	imports = [
-          ./hosts
 	  ./home
+	  ./hosts
 	  inputs.devenv.flakeModule
 	  inputs.flake-parts.flakeModules.easyOverlay
 	  inputs.pre-commit-hooks.flakeModule
