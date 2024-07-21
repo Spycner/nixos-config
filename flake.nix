@@ -16,46 +16,83 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-  };
-
-  outputs = { 
-    self, 
-    nixpkgs, 
-    home-manager,
-    systems,
-    ... 
-  } @ inputs: let
-    inherit (self) outputs;
-    lib = nixpkgs.lib // home-manager.lib;
-    forEachSystem = f: lib.genAttrs (import systems) (system: f pkgsFor.${system});
-    pkgsFor = lib.genAttrs (import systems) (
-      system:
-        import nixpkgs {
-          inherit system;
-          config.allowUnfree = true;
-        }
-    );
-  in{
-    inherit lib;
-
-    # devShells = forEachSystem (pkgs: import ./shell.nix {inherit pkgs;});
-    formatter = forEachSystem (pkgs: pkgs.alejandra);
-
-    nixosConfigurations = {
-      persephone = lib.nixosSystem {
-        system = "x86_64-linux";
-        modules = [
-          ./hosts/persephone
-          ({ pkgs, ... }: {
-            environment.systemPackages = [
-              (import ./shellscripts/cursor.nix { inherit pkgs; })
-            ];
-          })
-        ];
-        specialArgs = {
-                inherit inputs outputs;
-        };
-      };
+    flake-parts = {
+      url =  "github:hercules-ci/flake-parts";
+      inputs.nixpkgs-lib.follows = "nixpkgs";
+    };
+    pre-commit-hooks = {
+      url = "github:cachix/pre-commit-hooks.nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    catppuccinifier = {
+      url = "github:lighttigerXIV/catppuccinifier";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
   };
+
+  outputs = { self, nixpkgs, flake-parts, ... } @ inputs:
+    flake-parts.lib.mkFlake { inherit inputs; } {
+      systems = [ "x86_64-linux" ];
+	imports = [
+          ./hosts
+	  inputs.devenv.flakeModule
+	  inputs.flake-parts.flakeModules.easyOverlay
+	  inputs.pre-commit-hooks.flakeModule
+	  inputs.treefmt-nix.flakeModule
+	];
+
+	perSystem = {
+          inputs',
+	  config,
+	  pkgs,
+	  ...
+	}: {
+	  formatter = pkgs.alejandra;
+
+	  pre-commit = {
+            settings.excludes = [ "flake.lock" ];
+
+	    settings.hooks = {
+              alejandra.enable = true;
+	      prettier = {
+		enable = true;
+	      };
+	    };
+	  };
+
+	  treefmt = {
+            projectRootFile = "flake.nix";
+
+	    programs = {
+              alejandra.enable = true;
+	      ruff.enable = true;
+	      deadnix.enable = true;
+	      spellcheck.enable = true;
+	      shfmt = {
+                enable = true;
+		ident_size = 4;
+	      };
+	    };
+	  };
+
+	  devenv.shells.dots = {
+            packages = with pkgs; [
+              inputs'.agenix.packages.default
+	      inputs'.catppuccinifier.packages.cli
+	      config.treefmt.build.wrapper
+	      nil
+	      git
+	      alejandra
+	      nodePackages.prettier
+	      glow
+	      statix
+	      deadnix
+	    ];
+
+	    languages.nix.enable = true;
+
+	    enterShell = "dots devenv shell";
+	  };
+	};
+      };
 }

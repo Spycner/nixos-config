@@ -88,7 +88,7 @@
     packages = with pkgs; [
     	gh
     	git
-	neovim
+	nvim-pkg
 	wget
 	curl
     #  thunderbird
