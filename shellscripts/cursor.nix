@@ -1,4 +1,4 @@
-{pkgs, homeDir ? pkgs.lib.getHome} :
+{pkgs, homeDir ? "$HOME/Applications"} :
 pkgs.writeShellScriptBin "cursor" ''
     # Find the latest cursor AppImage in ~/Applications
     echo "Home Directory: ${homeDir}"
