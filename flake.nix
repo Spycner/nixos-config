@@ -36,8 +36,8 @@
       system:
         import nixpkgs {
           inherit system;
-	  config.allowUnfree = true;
-	}
+          config.allowUnfree = true;
+        }
     );
   in{
     inherit lib;
@@ -48,10 +48,17 @@
     nixosConfigurations = {
       persephone = lib.nixosSystem {
         system = "x86_64-linux";
-        modules = [./hosts/persephone];
-	specialArgs = {
-          inherit inputs outputs;
-	};
+        modules = [
+          ./hosts/persephone
+          ({ pkgs, ... }: {
+            environment.systemPackages = [
+              (import ./shellscripts/cursor.nix { inherit pkgs; })
+            ];
+          })
+        ];
+        specialArgs = {
+                inherit inputs outputs;
+        };
       };
     };
   };
