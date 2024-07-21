@@ -44,6 +44,7 @@
       systems = [ "x86_64-linux" ];
 	imports = [
           ./hosts
+	  ./home
 	  inputs.devenv.flakeModule
 	  inputs.flake-parts.flakeModules.easyOverlay
 	  inputs.pre-commit-hooks.flakeModule
