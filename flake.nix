@@ -16,10 +16,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    catppuccinifier = {
-      url = "github:lighttigerXIV/catppuccinifier";
-      inputs.nixpkgs.follows = "nipkgs";
-    };
   };
 
   outputs = { 
@@ -43,7 +39,7 @@
     inherit lib;
 
     # devShells = forEachSystem (pkgs: import ./shell.nix {inherit pkgs;});
-    formatter = ForEachSystem (pkgs: pkgs.alejandra);
+    formatter = forEachSystem (pkgs: pkgs.alejandra);
 
     nixosConfigurations = {
       persephone = lib.nixosSystem {
