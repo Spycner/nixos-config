@@ -20,6 +20,7 @@
             backupFileExtension = "bak";
           };
         }
+        inputs.agenix.nixosModules.default
       ];
     };
   };

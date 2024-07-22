@@ -2,6 +2,7 @@
   description = "My NixOS system flake";
 
   inputs = {
+    systems.url = "github:nix-systems/default-linux";
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
     home-manager = {
@@ -9,11 +10,16 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    devenv.url = "github:cachix/devenv";
+    flake-utils = {
+      url = "github:numtide/flake-utils";
+      inputs.systems.follows = "systems";
+    };
 
     agenix = {
-      url = "github:ryan4yin/ragenix";
+      url = "github:ryantm/agenix";
       inputs.nixpkgs.follows = "nixpkgs";
+      inputs.home-manager.follows = "home-manager";
+      inputs.systems.follows = "systems";
     };
 
     flake-parts = {
@@ -90,6 +96,7 @@
             inputs'.agenix.packages.default
             inputs'.catppuccinifier.packages.cli
             config.treefmt.build.wrapper
+            config.packages.repl
             nil
             git
             alejandra
