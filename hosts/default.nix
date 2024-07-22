@@ -8,6 +8,12 @@
     inherit (inputs.nixpkgs.lib) nixosSystem;
 
     specialArgs = {inherit inputs self;};
+
+    system = "x86_64-linux";
+    pkgs = inputs.nixpkgs {
+      inherit system;
+      config.allowUnfree = true;
+    };
   in {
     persephone = nixosSystem {
       inherit specialArgs;

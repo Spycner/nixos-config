@@ -2,7 +2,7 @@
   home.packages = with pkgs; [
     docker-compose
     rye
-    vscode
+    # vscode
   ];
 
   imports = [
