@@ -16,7 +16,7 @@
         inputs.home-manager.nixosModules.home-manager
         {
           home-manager = {
-            user.pkraus.imports = homeImports."pkraus@persephone";
+            users.pkraus.imports = homeImports."pkraus@persephone";
             extraSpecialArgs = specialArgs;
             backupFileExtension = "bak";
           };

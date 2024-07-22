@@ -23,5 +23,5 @@
     manpages.enable = true;
   };
 
-  programs.home-manager.enable
+  programs.home-manager.enable = true;
  }

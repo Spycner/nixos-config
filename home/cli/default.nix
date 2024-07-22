@@ -8,5 +8,5 @@ in {
   home.sessionVariables = {
     EDITOR = "nivm";
     NIX_AUTO_RUN = "1";
-  }
+  };
 }
