@@ -51,7 +51,6 @@
       imports = [
         ./home
         ./hosts
-        inputs.devenv.flakeModule
         inputs.flake-parts.flakeModules.easyOverlay
         inputs.pre-commit-hooks.flakeModule
         inputs.treefmt-nix.flakeModule
