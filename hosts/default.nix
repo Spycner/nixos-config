@@ -13,6 +13,7 @@
       inherit specialArgs;
       modules = [
         ./persephone
+        inputs.home-manager.nixosModules.home-manager
         {
           home-manager = {
             user.pkraus.imports = homeImports."pkraus@persephone";
