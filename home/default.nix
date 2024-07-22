@@ -34,12 +34,12 @@ in {
     homeConfigurations = {
       "pkraus_athena" = homeManagerConfiguration {
         inherit pkgs extraSpecialArgs;
-	modules = homeImports."pkraus@athena";
+	      modules = homeImports."pkraus@athena";
       };
 
       "pkraus_persephone" = homeManagerConfiguration {
         inherit pkgs extraSpecialArgs;
-	modules = homeImports."pkraus@persephone";
+	      modules = homeImports."pkraus@persephone";
       };
     };
   };

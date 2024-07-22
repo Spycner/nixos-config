@@ -42,67 +42,67 @@
   outputs = { self, nixpkgs, home-manager, flake-parts, ... } @ inputs:
     flake-parts.lib.mkFlake { inherit inputs; } {
       systems = [ "x86_64-linux" ];
-	imports = [
-	  ./home
-	  ./hosts
-	  inputs.devenv.flakeModule
-	  inputs.flake-parts.flakeModules.easyOverlay
-	  inputs.pre-commit-hooks.flakeModule
-	  inputs.treefmt-nix.flakeModule
-	];
+      imports = [
+        ./home
+        ./hosts
+        inputs.devenv.flakeModule
+        inputs.flake-parts.flakeModules.easyOverlay
+        inputs.pre-commit-hooks.flakeModule
+        inputs.treefmt-nix.flakeModule
+      ];
 
-	perSystem = {
-          inputs',
-	  config,
-	  pkgs,
-	  ...
-	}: {
-	  formatter = pkgs.alejandra;
+      perSystem = {
+        inputs',
+        config,
+        pkgs,
+        ...
+      }: {
+        formatter = pkgs.alejandra;
 
-	  pre-commit = {
-            settings.excludes = [ "flake.lock" ];
+        pre-commit = {
+          settings.excludes = [ "flake.lock" ];
 
-	    settings.hooks = {
-              alejandra.enable = true;
-	      prettier = {
-		enable = true;
-	      };
-	    };
-	  };
+          settings.hooks = {
+            alejandra.enable = true;
+            prettier = {
+              enable = true;
+            };
+          };
+        };
 
-	  treefmt = {
-            projectRootFile = "flake.nix";
+        treefmt = {
+          projectRootFile = "flake.nix";
 
-	    programs = {
-              alejandra.enable = true;
-	      ruff.enable = true;
-	      deadnix.enable = true;
-	      spellcheck.enable = true;
-	      shfmt = {
-                enable = true;
-		ident_size = 4;
-	      };
-	    };
-	  };
+          programs = {
+            alejandra.enable = true;
+            ruff.enable = true;
+            deadnix.enable = true;
+            spellcheck.enable = true;
+            shfmt = {
+              enable = true;
+              ident_size = 4;
+            };
+          };
+        };
 
-	  devenv.shells.dots = {
-            packages = with pkgs; [
-              inputs'.agenix.packages.default
-	      inputs'.catppuccinifier.packages.cli
-	      config.treefmt.build.wrapper
-	      nil
-	      git
-	      alejandra
-	      nodePackages.prettier
-	      glow
-	      statix
-	      deadnix
-	    ];
+        devenv.shells.dots = {
+          packages = with pkgs; [
+            inputs'.agenix.packages.default
+            inputs'.catppuccinifier.packages.cli
+            config.treefmt.build.wrapper
+            nil
+            git
+            alejandra
+            nodePackages.prettier
+            glow
+            statix
+            deadnix
+          ];
 
-	    languages.nix.enable = true;
+          languages.nix.enable = true;
 
-	    enterShell = "dots devenv shell";
-	  };
-	};
+          enterShell = "dots devenv shell";
+        };
       };
+    };
 }
