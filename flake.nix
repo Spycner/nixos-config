@@ -91,7 +91,7 @@
           };
         };
 
-        devenv.shells.dots = {
+        devShells.default = pkgs.mkShell {
           packages = with pkgs; [
             inputs'.agenix.packages.default
             inputs'.catppuccinifier.packages.cli
@@ -105,10 +105,12 @@
             statix
             deadnix
           ];
-
+          name = "dots";
+          DIRENV_LOG_FORMAT = "";
+          shellHooks = ''
+            ${config.pre-commit.installationScript}
+          '';
           languages.nix.enable = true;
-
-          enterShell = "dots devenv shell";
         };
       };
     };
