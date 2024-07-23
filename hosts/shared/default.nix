@@ -2,7 +2,7 @@
   imports = [
     ./theming/stylix.nix
     ./hardware/swap.nix
-    ./hardware/xremap.nix
+    ./services/xremap.nix
     inputs.stylix.nixosModules.stylix
     inputs.xremap.nixosModules.default
   ];

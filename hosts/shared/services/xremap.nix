@@ -1,6 +1,6 @@
 { ... }: {
   services.xremap = {
-    withHypr = true;
+    # withHypr = true;
     withGnome = true;
     userName = "pkraus";
     config = {
