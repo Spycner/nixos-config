@@ -32,7 +32,7 @@ in
 
     cursor = {
       package = pkgs.catppuccin-cursors.frappeLight;
-      name = "Catppuccin-Frappe Cursor";
+      name = "Catppuccin-Frappe-Light";
     };
   };
 }
