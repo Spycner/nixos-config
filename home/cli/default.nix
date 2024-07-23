@@ -3,7 +3,9 @@
   cond = config.xdg.configHome;
   cache = config.xdg.cacheHome;
 in {
-  imports = [];
+  imports = [
+    ./neovim
+  ];
 
   home.sessionVariables = {
     EDITOR = "nivm";
