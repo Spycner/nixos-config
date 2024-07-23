@@ -1,3 +1,5 @@
 { ... } : {
-  imports = [];
+  imports = [
+    ./theming/stylix.nix
+  ];
 }
