@@ -1,7 +1,7 @@
 { pkgs, ... }:
 let
   theme = "${pkgs.base16-schemes}/share/themes/catppuccin-frappe.yaml";
-  wallpaper = "./shaded_landscape.png"
+  wallpaper = ./shaded_landscape.png;
 in
 {
   stylix = {
