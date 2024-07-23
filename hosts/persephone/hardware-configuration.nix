@@ -24,7 +24,14 @@
       options = [ "fmask=0022" "dmask=0022" ];
     };
 
-  swapDevices = [ ];
+  swapDevices = [ 
+    {
+      device = "/swapfile";
+      size = 20 * 1024;
+    }
+  ];
+  boot.resumeDevice = "/dev/mapper/myroot";
+  boot.kernelParams = [ "resume_offset=1024" ];
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
   # (the default) this is the recommended approach. When using systemd-networkd it's
