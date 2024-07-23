@@ -1,8 +1,11 @@
 { config, ... }: {
   programs.nixvim = {
     clipboard = {
-      providers = "xclip";
-      
+      providers = {
+        xclip = {
+          enable = true;
+        };
+      };
     };
 
     options = {
