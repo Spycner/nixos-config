@@ -23,6 +23,7 @@
     };
 
     stylix.url = "github:danth/stylix";
+    xremap.url = "github:xremap/nix-flake";
   };
 
   outputs = { self, nixpkgs, home-manager, ... } @ inputs:
@@ -37,7 +38,6 @@
         modules = [
           ./hosts/shared
           ./hosts/persephone
-          inputs.stylix.nixosModules.stylix
           home-manager.nixosModules.home-manager
           {
             home-manager.users.pkraus = import ./home/default.nix {
