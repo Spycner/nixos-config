@@ -30,8 +30,8 @@
       size = 20 * 1024;
     }
   ];
-  boot.resumeDevice = "/dev/mapper/myroot";
-  boot.kernelParams = [ "resume_offset=1024" ];
+  boot.resumeDevice = "/dev/disk/by-uuid/858ca274-a1d5-4f25-b7d6-8570867d1446";
+  boot.kernelParams = [ "resume_offset=4141056" ];
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
   # (the default) this is the recommended approach. When using systemd-networkd it's
