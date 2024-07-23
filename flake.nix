@@ -24,21 +24,20 @@
   outputs = { self, nixpkgs, home-manager, ... } @ inputs:
   let
     system = "x86_64-linux";
-    specialArgs = { inherit inputs self; };
-    homeManagerConfigurations = import ./home { inherit self inputs nixpkgs system; };
+    pkgs = import nixpkgs { inherit system; config.allowUnfree = true; };
+    specialArgs = { inherit inputs self pkgs; };
   in
   {
     nixosConfigurations = {
       persephone = nixpkgs.lib.nixosSystem {
-        inherit system;
+        inherit system pkgs;
         modules = [
           ./hosts/shared
           ./hosts/persephone
-          home-manager.nixosModules.home-manager {
-            home-manager = {
-              users.pkraus = homeManagerConfigurations.homeConfigurations.pkraus;
-              extraSpecialArgs = specialArgs;
-              backupFileExtension = "bak";
+          home-manager.nixosModules.home-manager
+          {
+            home-manager.users.pkraus = import ./home/default.nix {
+              inherit pkgs inputs self;
             };
           }
         ];
@@ -46,6 +45,12 @@
       };
     };
 
-    homeConfigurations = homeManagerConfigurations.homeConfigurations;
+    homeConfigurations.pkraus = home-manager.lib.homeManagerConfiguration {
+      inherit pkgs;
+      extraSpecialArgs = specialArgs;
+      modules = [
+        ./home/default.nix
+      ];
+    };
   };
 }
