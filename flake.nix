@@ -15,10 +15,14 @@
       url = "github:lighttigerXIV/catppuccinifier";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    # nix-index-db is used by nix-index to provide a database of packages
     nix-index-db = {
       url = "github:Mic92/nix-index-database";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    stylix.url = "github:danth/stylix";
   };
 
   outputs = { self, nixpkgs, home-manager, ... } @ inputs:
@@ -33,6 +37,7 @@
         modules = [
           ./hosts/shared
           ./hosts/persephone
+          inputs.stylix.nixosModules.stylix
           home-manager.nixosModules.home-manager
           {
             home-manager.users.pkraus = import ./home/default.nix {
