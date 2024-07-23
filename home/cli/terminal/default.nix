@@ -1,6 +1,6 @@
 {
   imports = [
+    ./kitty.nix
     ./tmux.nix
-    ./wezterm.nix
   ];
 }
