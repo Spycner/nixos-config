@@ -21,25 +21,31 @@
     };
   };
 
-  outputs = { self, nixpkgs, home-manager, ... } @ inputs: let
-    specialArgs = {inherit inputs self;};
-  in  {
+  outputs = { self, nixpkgs, home-manager, ... } @ inputs:
+  let
+    system = "x86_64-linux";
+    specialArgs = { inherit inputs self; };
+    homeManagerConfigurations = import ./home { inherit self inputs nixpkgs system; };
+  in
+  {
     nixosConfigurations = {
       persephone = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
+        inherit system;
         modules = [
-          ./home
           ./hosts/shared
           ./hosts/persephone
-          inputs.home-manager.nixosModules.home-manager {
+          home-manager.nixosModules.home-manager {
             home-manager = {
-              users.pkraus.imports = homeImports."pkraus@persephone";
+              users.pkraus = homeManagerConfigurations.homeConfigurations.pkraus;
               extraSpecialArgs = specialArgs;
               backupFileExtension = "bak";
             };
           }
         ];
+        specialArgs = specialArgs;
       };
     };
+
+    homeConfigurations = homeManagerConfigurations.homeConfigurations;
   };
 }

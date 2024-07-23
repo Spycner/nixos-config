@@ -1,46 +1,39 @@
-{
-  self,
-  inputs,
-  ...
-}: let
-  extraSpecialArgs = {inherit inputs self;};
-
-  homeImports = {
-    # laptop
-    "pkraus@persephone" = [
-      ./base.nix
-      ./persephone.nix
-    ];
-
-    # desktop
-    "pkraus@athena" = [
-      ./base.nix
-      ./athena.nix
-    ];
-  };
-
-  inherit (inputs.home-manager.lib) homeManagerConfiguration;
-
-  system = "x86_64-linux";
-
-  pkgs = inputs.nixpkgs {
+{ self, inputs, nixpkgs ? inputs.nixpkgs, system ? "x86_64-linux" }:
+let
+  pkgs = import nixpkgs {
     inherit system;
     config.allowUnfree = true;
   };
-in {
-  _module.args = {inherit homeImports;};
+  extraSpecialArgs = { inherit inputs self; };
 
-  flake = {
-    homeConfigurations = {
-      "pkraus_athena" = homeManagerConfiguration {
-        inherit pkgs extraSpecialArgs;
-	      modules = homeImports."pkraus@athena";
-      };
+  inherit (inputs.home-manager.lib) homeManagerConfiguration;
+in
+{
+  homeConfigurations."pkraus" = homeManagerConfiguration {
+    inherit pkgs extraSpecialArgs;
+    modules = [
+      ({ lib, ... }: {
+        imports = [
+          inputs.nix-index-db.hmModules.nix-index
+          ./cli
+          ./engineering
+        ];
 
-      "pkraus_persephone" = homeManagerConfiguration {
-        inherit pkgs extraSpecialArgs;
-	      modules = homeImports."pkraus@persephone";
-      };
-    };
+        home = {
+          username = "pkraus";
+          homeDirectory = "/home/pkraus";
+          stateVersion = "24.05";
+          extraOutputsToInstall = ["doc" "devdoc"];
+        };
+
+        manual = {
+          html.enable = true;
+          json.enable = true;
+          manpages.enable = true;
+        };
+
+        programs.home-manager.enable = true;
+      })
+    ];
   };
 }
