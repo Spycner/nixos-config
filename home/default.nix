@@ -17,7 +17,7 @@
 
   imports = [
     inputs.nix-index-db.hmModules.nix-index
+    inputs.nixvim.homeManagerModules.nixvim
     ./cli
-    ./engineering
   ];
 }
