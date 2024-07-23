@@ -45,9 +45,10 @@
           ./hosts/persephone
           home-manager.nixosModules.home-manager
           {
-            home-manager.users.pkraus = import ./home/default.nix {
-              inherit inputs;
-            };
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+            home-manager.users.pkraus = import ./home/default.nix;
+            home-manager.extraSpecialArgs = specialArgs;
           }
         ];
         specialArgs = specialArgs;
