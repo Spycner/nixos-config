@@ -85,7 +85,6 @@
     isNormalUser = true;
     description = "Pasal Kraus";
     extraGroups = [ "networkmanager" "wheel" ];
-    shell = pkgs.zsh;
     packages = with pkgs; [
     	gh
     	git

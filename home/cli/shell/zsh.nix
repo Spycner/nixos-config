@@ -7,6 +7,8 @@ in
     eza
     bat
     vivid
+    fzf
+    ripgrep
   ];
 
   home.sessionVariables = {
