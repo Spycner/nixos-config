@@ -8,11 +8,11 @@
       };
     };
 
-    options = {
+    opts = {
       number = true;
       relativenumber = true;
       mouse = "a";
-      mousemodel = "extrend";
+      mousemodel = "extend";
       splitbelow = true;
       splitright = true;
 
