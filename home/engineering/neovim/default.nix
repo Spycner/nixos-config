@@ -7,6 +7,7 @@
     vimdiffAlias = true;
 
     plugins = with pkgs.vimPlugins; [
+      alpha-nvim
       catppuccin-nvim
       cmp-buffer
       cmp-nvim-lsp
@@ -26,6 +27,7 @@
       nvim-lspconfig
       nvim-tree-lua
       (nvim-treesitter.withPlugins (_: pkgs.tree-sitter.allGrammars))
+      nvim-web-devicons
       plenary-nvim
       rainbow-delimiters-nvim
       telescope-fzy-native-nvim
