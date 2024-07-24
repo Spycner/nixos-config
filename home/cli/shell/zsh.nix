@@ -71,11 +71,14 @@ in
     config = {
       theme = "Catppuccin Frappe";
     };
-     themes = {
-      Catppuccin-Frappe = builtins.readFile (pkgs.fetchurl {
-        url = "https://github.com/catppuccin/bat/raw/main/themes/Catppuccin%20Frappe.tmTheme";
-        sha256 = "0000000000000000000000000000000000000000000000000000";
-      });
+    themes = {
+      Catppuccin-Frappe = {
+        src = pkgs.fetchurl {
+          url = "https://github.com/catppuccin/bat/raw/main/themes/Catppuccin%20Frappe.tmTheme";
+          sha256 = "0000000000000000000000000000000000000000000000000000";
+        };
+        file = "Catppuccin Frappe.tmTheme";
+      };
     };
   };
 
