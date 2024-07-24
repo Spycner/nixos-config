@@ -2,6 +2,7 @@
 {
   imports = [
     ./neovim
+    ./programs
     ./shell
     ./terminal
   ];
