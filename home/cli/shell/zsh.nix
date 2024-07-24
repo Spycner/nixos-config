@@ -4,11 +4,10 @@ in
 {
   home.packages = with pkgs; [
     zinit
-    eza
-    bat
     vivid
     fzf
     ripgrep
+    curl
   ];
 
   home.sessionVariables = {
@@ -16,12 +15,74 @@ in
     HISTSIZE = 10000;
     SAVEHIST = 10000;
     LS_COLORS = "$(vivid generate catppuccin-frappe)";
-    BAT_THEME = "Catppuccin Frappe";
     MANPAGER = "sh -c 'col -bx | bat -l man -p'";
   };
 
   programs.starship = {
     enable = true;
+    settings = {
+      # Sets user-defined palette
+      palette = "catppuccin_frappe";
+
+      character = {
+        success_symbol = "[[♥](bold green) ❯](bold maroon)";
+        error_symbol = "[❯](bold red)";
+        vimcmd_symbol = "[❮](bold green)";
+      };
+
+      directory = {
+        truncation_length = 4;
+        style = "bold lavender";
+      };
+
+      palettes.catppuccin_frappe = {
+        rosewater = "#f2d5cf";
+        flamingo = "#eebebe";
+        pink = "#f4b8e4";
+        mauve = "#ca9ee6";
+        red = "#e78284";
+        maroon = "#ea999c";
+        peach = "#ef9f76";
+        yellow = "#e5c890";
+        green = "#a6d189";
+        teal = "#81c8be";
+        sky = "#99d1db";
+        sapphire = "#85c1dc";
+        blue = "#8caaee";
+        lavender = "#babbf1";
+        text = "#c6d0f5";
+        subtext1 = "#b5bfe2";
+        subtext0 = "#a5adce";
+        overlay2 = "#949cbb";
+        overlay1 = "#838ba7";
+        overlay0 = "#737994";
+        surface2 = "#626880";
+        surface1 = "#51576d";
+        surface0 = "#414559";
+        base = "#303446";
+        mantle = "#292c3c";
+        crust = "#232634";
+      };
+    };
+  };
+
+  programs.bat = {
+    enable = true;
+    config = {
+      theme = "Catppuccin Frappe";
+    };
+     themes = {
+      Catppuccin-Frappe = builtins.readFile (pkgs.fetchurl {
+        url = "https://github.com/catppuccin/bat/raw/main/themes/Catppuccin%20Frappe.tmTheme";
+        sha256 = "0000000000000000000000000000000000000000000000000000";
+      });
+    };
+  };
+
+  programs.eza = {
+    enable = true;
+    icons = true;
+    git = true;
   };
 
   programs.zsh = {
@@ -90,6 +151,19 @@ in
       setopt hist_save_no_dups
       setopt hist_ignore_dups
       setopt hist_find_no_dups
+
+      # Add Catppuccin theme for Fast Syntax Highlighting
+      CATPPUCCIN_FLAVOUR="frappe"  # Change this to your preferred flavor: latte, frappe, macchiato, or mocha
+      CATPPUCCIN_FSH_THEME="$HOME/.config/fsh/themes/catppuccin-$CATPPUCCIN_FLAVOUR.ini"
+
+      if [ ! -f "$CATPPUCCIN_FSH_THEME" ]; then
+        mkdir -p "$(dirname "$CATPPUCCIN_FSH_THEME")"
+        curl -o "$CATPPUCCIN_FSH_THEME" "https://raw.githubusercontent.com/catppuccin/zsh-fsh/main/themes/catppuccin-$CATPPUCCIN_FLAVOUR.ini"
+      fi
+
+      # Apply the theme after loading fast-syntax-highlighting
+      zinit light zdharma-continuum/fast-syntax-highlighting
+      fast-theme XDG:catppuccin-$CATPPUCCIN_FLAVOUR
     '';
   };
 }
