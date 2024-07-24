@@ -74,7 +74,7 @@ in
      themes = {
       Catppuccin-Frappe = builtins.readFile (pkgs.fetchurl {
         url = "https://github.com/catppuccin/bat/raw/main/themes/Catppuccin%20Frappe.tmTheme";
-        sha256 = "0000000000000000000000000000000000000000000000000000";
+        sha256 = "sha256-efl8PKlHqTiPTgwWewrfqWKs/JzWSyd4ltPOVi75pTA=";
       });
     };
   };
