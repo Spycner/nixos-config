@@ -1,6 +1,7 @@
 # Code from https://gist.github.com/lukalot/fcbf3216ad13b8303ab0947af0d5abd5
 {pkgs, ...}: let
   pname = "cursor";
+  version = "latest"; # Using "latest" as a placeholder
 
   src = pkgs.fetchurl {
     url = "https://downloader.cursor.sh/linux/appImage/x64";
@@ -10,11 +11,11 @@
       chmod +x $out
     '';
   };
-  appimageContents = pkgs.appimageTools.extractType2 { inherit pname src; };
+  appimageContents = pkgs.appimageTools.extract {inherit pname version src; };
 in
   with pkgs;
     appimageTools.wrapType2 {
-      inherit pname src;
+      inherit pname version src;
 
       extraInstallCommands = ''
         install -m 444 -D ${appimageContents}/${pname}.desktop -t $out/share/applications
@@ -22,9 +23,12 @@ in
           --replace-quiet 'Exec=AppRun' 'Exec=${pname}'
         cp -r ${appimageContents}/usr/share/icons $out/share
 
-        # Install the binary without a version suffix
+        # Ensure the binary exists and create a symlink if it doesn't already exist
         if [ -e ${appimageContents}/AppRun ]; then
-          install -m 755 -D ${appimageContents}/AppRun $out/bin/${pname}
+          install -m 755 -D ${appimageContents}/AppRun $out/bin/${pname}-${version}
+          if [ ! -L $out/bin/${pname} ]; then
+            ln -s $out/bin/${pname}-${version} $out/bin/${pname}
+          fi
         else
           echo "Error: Binary not found in extracted AppImage contents."
           exit 1
