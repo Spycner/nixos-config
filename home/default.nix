@@ -13,6 +13,16 @@
     allowUnfree = true;
   };
 
+  catppuccin = {
+    enable = true;
+    flavor = "frappe";
+    pointerCursor = {
+      enable = true;
+      accent = "light";
+      flavor = "frappe";
+    };
+  };
+
   manual = {
     html.enable = true;
     json.enable = true;
@@ -21,6 +31,7 @@
 
   imports = [
     inputs.nix-index-db.hmModules.nix-index
+    inputs.catppuccin.homeManagerModules.catppuccin
     ./cli
     ./programs
   ];

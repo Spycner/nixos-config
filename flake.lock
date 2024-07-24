@@ -1,5 +1,20 @@
 {
   "nodes": {
+    "catppuccin": {
+      "locked": {
+        "lastModified": 1721784420,
+        "narHash": "sha256-bgF6fN4Qgk7NErFKGuuqWXcLORsiykTYyqMUFRiAUBY=",
+        "owner": "catppuccin",
+        "repo": "nix",
+        "rev": "8bdb55cc1c13f572b6e4307a3c0d64f1ae286a4f",
+        "type": "github"
+      },
+      "original": {
+        "owner": "catppuccin",
+        "repo": "nix",
+        "type": "github"
+      }
+    },
     "catppuccinifier": {
       "inputs": {
         "crane": "crane",
@@ -69,7 +84,7 @@
     },
     "devshell": {
       "inputs": {
-        "flake-utils": "flake-utils_3",
+        "flake-utils": "flake-utils_4",
         "nixpkgs": [
           "nixvim",
           "nixpkgs"
@@ -91,7 +106,7 @@
     },
     "devshell_2": {
       "inputs": {
-        "flake-utils": "flake-utils_4",
+        "flake-utils": "flake-utils_5",
         "nixpkgs": "nixpkgs_2"
       },
       "locked": {
@@ -106,6 +121,29 @@
         "owner": "numtide",
         "repo": "devshell",
         "type": "github"
+      }
+    },
+    "firefox-addons": {
+      "inputs": {
+        "flake-utils": "flake-utils_3",
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "dir": "pkgs/firefox-addons",
+        "lastModified": 1721793798,
+        "narHash": "sha256-HfdWMR5qC2GOeBMv+UxzVgzlJ6+f5vI9YSW/tTIvB/c=",
+        "owner": "rycee",
+        "repo": "nur-expressions",
+        "rev": "2687da27b1f740e281305fc95b76c076e7ca31b2",
+        "type": "gitlab"
+      },
+      "original": {
+        "dir": "pkgs/firefox-addons",
+        "owner": "rycee",
+        "repo": "nur-expressions",
+        "type": "gitlab"
       }
     },
     "flake-compat": {
@@ -214,6 +252,21 @@
       }
     },
     "flake-utils_3": {
+      "locked": {
+        "lastModified": 1629284811,
+        "narHash": "sha256-JHgasjPR0/J1J3DRm4KxM4zTyAj4IOJY8vIl75v/kPI=",
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "rev": "c5d161cc0af116a2e17f54316f0bf43f0819785c",
+        "type": "github"
+      },
+      "original": {
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "type": "github"
+      }
+    },
+    "flake-utils_4": {
       "inputs": {
         "systems": "systems_3"
       },
@@ -231,7 +284,7 @@
         "type": "github"
       }
     },
-    "flake-utils_4": {
+    "flake-utils_5": {
       "inputs": {
         "systems": "systems_4"
       },
@@ -709,7 +762,9 @@
     },
     "root": {
       "inputs": {
+        "catppuccin": "catppuccin",
         "catppuccinifier": "catppuccinifier",
+        "firefox-addons": "firefox-addons",
         "home-manager": "home-manager",
         "nix-index-db": "nix-index-db",
         "nixpkgs": "nixpkgs",

@@ -15,8 +15,14 @@ in
     ZINIT_HOME = ZINIT_HOME;
     HISTSIZE = 10000;
     SAVEHIST = 10000;
+    
     LS_COLORS = "$(vivid generate catppuccin-frappe)";
+
     MANPAGER = "sh -c 'col -bx | bat -l man -p'";
+    MANROFFOPT = "-c";
+
+    LESSHISTFILE = "$HOME/.cache/less/history";
+    LESSKEY = "$HOME/.config/less/lesskey";
   };
 
   programs.starship = {
@@ -70,6 +76,7 @@ in
   programs.bat = {
     enable = true;
     config = {
+      pager = "less -FR";
       theme = "Catppuccin Frappe";
     };
   };
