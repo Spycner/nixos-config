@@ -6,6 +6,6 @@ in {
   ];
 
   imports = [
-    # ./vscode.nix
+    ./vscode.nix
   ];
 }
