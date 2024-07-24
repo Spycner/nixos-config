@@ -7,6 +7,11 @@
     homeDirectory = "/home/pkraus";
     stateVersion = "24.05";
     extraOutputsToInstall = ["doc" "devdoc"];
+    enableNixpkgsConfig = true;
+  };
+
+  inputs.nixpkgs.config = {
+    allowUnfree = true;
   };
 
   manual = {

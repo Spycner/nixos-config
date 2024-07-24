@@ -4,4 +4,6 @@
     ./services/xremap.nix
     inputs.xremap.nixosModules.default
   ];
+
+  nixpkgs.config.allowUnfree = true;
 }
