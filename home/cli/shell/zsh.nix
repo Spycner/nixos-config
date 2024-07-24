@@ -142,18 +142,16 @@ in
 
       # Add Catppuccin theme for Fast Syntax Highlighting
       CATPPUCCIN_FLAVOUR="frappe"  # Change this to your preferred flavor: latte, frappe, macchiato, or mocha
-      CATPPUCCIN_FSH_THEME="$HOME/.config/fsh/themes/catppuccin-$CATPPUCCIN_FLAVOUR.zsh"
+      CATPPUCCIN_FSH_THEME="$HOME/.config/fsh/catppuccin-$CATPPUCCIN_FLAVOUR.ini"
 
       if [ ! -f "$CATPPUCCIN_FSH_THEME" ]; then
         mkdir -p "$(dirname "$CATPPUCCIN_FSH_THEME")"
-        curl -o "$CATPPUCCIN_FSH_THEME" "https://raw.githubusercontent.com/catppuccin/zsh-syntax-highlighting/main/themes/catppuccin_frappe-zsh-syntax-highlighting.zsh"
+        curl -o "$CATPPUCCIN_FSH_THEME" "https://raw.githubusercontent.com/catppuccin/zsh-fsh/main/themes/catppuccin-$CATPPUCCIN_FLAVOUR.ini"
       fi
-
-      # Source the theme file
-      source "$CATPPUCCIN_FSH_THEME"
 
       # Apply the theme after loading fast-syntax-highlighting
       zinit light zdharma-continuum/fast-syntax-highlighting
+      fast-theme XDG:catppuccin-$CATPPUCCIN_FLAVOUR
 
       # Download Catppuccin Frappe theme for bat
       BAT_THEME_DIR="$(bat --config-dir)/themes"
