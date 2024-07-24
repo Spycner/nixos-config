@@ -41,7 +41,7 @@
       # albert.tabout
       bradlc.vscode-tailwindcss
       # ms-vscode.vscode-typescript-tslint-plugin
-      asvetliakov.vscode-neovim
+      vscodevim.vim
     ];
   };
 }

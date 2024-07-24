@@ -8,6 +8,7 @@ in
     fzf
     ripgrep
     curl
+    wget
   ];
 
   home.sessionVariables = {
@@ -71,21 +72,6 @@ in
     config = {
       theme = "Catppuccin Frappe";
     };
-    themes = {
-      Catppuccin-Frappe = {
-        src = pkgs.fetchurl {
-          url = "https://github.com/catppuccin/bat/raw/main/themes/Catppuccin%20Frappe.tmTheme";
-        sha256 = "sha256-efl8PKlHqTiPTgwWewrfqWKs/JzWSyd4ltPOVi75pTA=";
-        };
-        file = "Catppuccin Frappe.tmTheme";
-      };
-    };
-  };
-
-  programs.eza = {
-    enable = true;
-    icons = true;
-    git = true;
   };
 
   programs.zsh = {
@@ -132,7 +118,6 @@ in
 
       # plugins #
 
-      zinit light zdharma-continuum/fast-syntax-highlighting
       zinit light zsh-users/zsh-completions # get possible completions for command i.e. go -> tab
       zinit light zsh-users/zsh-autosuggestions # autosuggest based on history
 
@@ -157,16 +142,31 @@ in
 
       # Add Catppuccin theme for Fast Syntax Highlighting
       CATPPUCCIN_FLAVOUR="frappe"  # Change this to your preferred flavor: latte, frappe, macchiato, or mocha
-      CATPPUCCIN_FSH_THEME="$HOME/.config/fsh/themes/catppuccin-$CATPPUCCIN_FLAVOUR.ini"
+      CATPPUCCIN_FSH_THEME="$HOME/.config/fsh/themes/catppuccin-$CATPPUCCIN_FLAVOUR.zsh"
 
       if [ ! -f "$CATPPUCCIN_FSH_THEME" ]; then
         mkdir -p "$(dirname "$CATPPUCCIN_FSH_THEME")"
-        curl -o "$CATPPUCCIN_FSH_THEME" "https://raw.githubusercontent.com/catppuccin/zsh-fsh/main/themes/catppuccin-$CATPPUCCIN_FLAVOUR.ini"
+        curl -o "$CATPPUCCIN_FSH_THEME" "https://raw.githubusercontent.com/catppuccin/zsh-syntax-highlighting/main/themes/catppuccin_frappe-zsh-syntax-highlighting.zsh"
       fi
+
+      # Source the theme file
+      source "$CATPPUCCIN_FSH_THEME"
 
       # Apply the theme after loading fast-syntax-highlighting
       zinit light zdharma-continuum/fast-syntax-highlighting
-      fast-theme XDG:catppuccin-$CATPPUCCIN_FLAVOUR
+
+      # Download Catppuccin Frappe theme for bat
+      BAT_THEME_DIR="$(bat --config-dir)/themes"
+      mkdir -p "$BAT_THEME_DIR"
+      if [ ! -f "$BAT_THEME_DIR/Catppuccin Frappe.tmTheme" ]; then
+        wget -P "$BAT_THEME_DIR" https://github.com/catppuccin/bat/raw/main/themes/Catppuccin%20Frappe.tmTheme
+      fi
     '';
+  };
+
+  programs.eza = {
+    enable = true;
+    icons = true;
+    git = true;
   };
 }
