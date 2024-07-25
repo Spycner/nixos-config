@@ -1,4 +1,8 @@
-{ ... }: {
+{ inputs, ... }: {
+  imports = [
+    inputs.xremap.nixosModules.default
+  ];
+
   services.xremap = {
     # withHypr = true;
     withGnome = true;
