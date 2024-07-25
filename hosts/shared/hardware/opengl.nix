@@ -1,6 +1,6 @@
 {pkgs, ...}: {
   # graphics drivers / HW accel
-  hardware.opengl = {
+  hardware.graphics = {
     enable = true;
 
     extraPackages = with pkgs; [
@@ -12,8 +12,5 @@
       vaapiVdpau
       libvdpau-va-gl
     ];
-
-    driSupport = true;
-    driSupport32Bit = true;
   };
 }

@@ -16,7 +16,4 @@
   };
 
   console.keyMap = "de";
-
-  modules.desktop = {}; # potential to configure monitors etc.
-
 }

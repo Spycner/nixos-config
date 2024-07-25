@@ -14,7 +14,7 @@
         ];
       };
 
-      hyprland.default = ["gtk", "hyprland"];
+      hyprland.default = ["gtk" "hyprland"];
     };
 
     # Sets environment variable NIXOS_XDG_OPEN_USE_PORTAL to 1

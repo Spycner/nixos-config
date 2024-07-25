@@ -17,5 +17,7 @@
     ];
   };
 
+  programs.zsh.enable = true;
+
   security.sudo.wheelNeedsPassword = false;
 }

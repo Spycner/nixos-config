@@ -11,7 +11,7 @@
       settings.UseDns = true;
     };
 
-    services.avahi = {
+    avahi = {
       enable = true;
       nssmdns4 = true;
       openFirewall = true; # Detect printers via UDP 5353
