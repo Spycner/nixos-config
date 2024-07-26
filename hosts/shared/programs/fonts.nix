@@ -6,6 +6,8 @@
       material-design-icons
       font-awesome
 
+      dejavu_fonts
+
       # Sans(Serif) fonts
       noto-fonts
       noto-fonts-cjk

@@ -10,7 +10,13 @@
     enable = true;
     lfs.enable = true;
 
-    extraConfig.gpg.format = "ssh";
+    extraConfig = {
+      gpg.format = "ssh";
+      credential = {
+        helper = "!${pkgs.gh}/bin/gh auth git-credential";
+        useHttpPath = true;
+      };
+    };
     userEmail = "pascal98kraus@gmail.com";
     userName = "Spycner";
   };
