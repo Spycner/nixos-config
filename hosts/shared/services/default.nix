@@ -1,7 +1,7 @@
 {...}: {
   imports = [
     ./gnome.nix
-    # ./greetd.nix only if hyprland is enabled
+    ./greetd.nix
     ./pipewire.nix
     ./printing.nix
     ./xremap.nix

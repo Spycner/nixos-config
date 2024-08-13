@@ -2,7 +2,7 @@
   imports = [
     ./fonts.nix
     ./gnome.nix
-    # ./hyprland.nix
+    ./hyprland.nix
     ./virtualization.nix
     ./xdg.nix
   ];

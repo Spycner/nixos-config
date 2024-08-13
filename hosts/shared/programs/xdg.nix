@@ -14,7 +14,7 @@
         ];
       };
 
-      # hyprland.default = ["gtk" "hyprland"]; 
+      hyprland.default = ["gtk" "hyprland"]; 
     };
 
     # Sets environment variable NIXOS_XDG_OPEN_USE_PORTAL to 1
@@ -25,7 +25,7 @@
     # and vscode has open like `External Uri Openers`
     xdgOpenUsePortal = false;
     extraPortals = with pkgs; [
-      # xdg-desktop-portal-gtk # for gtk
+      xdg-desktop-portal-gtk # for gtk
       # xdg-desktop-portal-kde  # for kde
     ];
   };
