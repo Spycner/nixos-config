@@ -4,5 +4,6 @@
     ./browsers/firefox.nix
 
     ./editors
+    ./hyprland
   ];
 }

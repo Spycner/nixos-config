@@ -24,7 +24,6 @@
         ublock-origin
         darkreader
         sourcegraph
-        decentraleyes
         clearurls
         sponsorblock
         h264ify
